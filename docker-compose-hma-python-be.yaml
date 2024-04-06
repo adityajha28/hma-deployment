@@ -1,6 +1,6 @@
 services:
   backend:
-    image: python-backend:latest
+    image: aditya280102/python-backend:latest
     build:
       context: .
       dockerfile: Dockerfile
