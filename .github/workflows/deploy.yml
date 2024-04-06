@@ -5,7 +5,7 @@ on:
 env:
   GOOGLE_API_KEY: ${{secrets.GOOGLE_API_KEY}}
   LANGCHAIN_TRACING_V2: true
-  LANGCHAIN_ENDPOINT: "https://api.smith.langchain.com"
+  LANGCHAIN_ENDPOINT: https://api.smith.langchain.com
   LANGCHAIN_API_KEY: ${{secrets.LANGCHAIN_API_KEY}}
   LANGCHAIN_PROJECT: ${{secrets.LANGCHAIN_PROJECT}}
 jobs:
@@ -42,11 +42,11 @@ jobs:
                 script: |
                   cd ~/hma-python-be
                   touch .env
-                  echo "GOOGLE_API_KEY=${{secrets.GOOGLE_API_KEY}}"
-                  echo "LANGCHAIN_TRACING_V2=true"
-                  echo "LANGCHAIN_ENDPOINT=${{env.LANGCHAIN_ENDPOINT}}
-                  echo "LANGCHAIN_API_KEY=${{secrets.LANGCHAIN_API_KEY}}"
-                  echo "LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}"
+                  echo "GOOGLE_API_KEY=${{secrets.GOOGLE_API_KEY}}" > .env
+                  echo "LANGCHAIN_TRACING_V2=true" >> .env
+                  echo "LANGCHAIN_ENDPOINT=${{env.LANGCHAIN_ENDPOINT}}" >> .env
+                  echo "LANGCHAIN_API_KEY=${{secrets.LANGCHAIN_API_KEY}}" >> .emv
+                  echo "LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}" >> .env
                   sudo docker compose -f docker-compose-hma-python-be.yaml down --volumes
                   sudo docker compose -f docker-compose-hma-python-be.yaml pull
                   sudo docker compose -f docker-compose-hma-python-be.yaml up -d
