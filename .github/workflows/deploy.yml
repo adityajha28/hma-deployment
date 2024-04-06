@@ -26,7 +26,6 @@ jobs:
                 host: ${{ secrets.HOST }}
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.SSH_KEY }}
-                port: ${{ secrets.PORT }}
                 source: "docker-compose-hma-python-be.yaml"
                 target: "~/hma-python-be/"
             - name: SSH to server
