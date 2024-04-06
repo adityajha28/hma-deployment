@@ -2,7 +2,12 @@ name: "HOTEL MANAGEMENT AI AGENT"
 on:
     push:
         branches: ["main"]
-
+env:
+  GOOGLE_API_KEY=${{secrets.GOOGLE_API_KEY}}
+  LANGCHAIN_TRACING_V2=true
+  LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+  LANGCHAIN_API_KEY=${{secrets.LANGCHAIN_API_KEY}}
+  LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -10,9 +15,9 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v2
             - name: Set up docker
-              uses: docker/setup-buildx-action@v1
+              uses: docker/setup-buildx-action@v3
             - name: Login to DockerHub
-              uses: docker/login-action@v2
+              uses: docker/login-action@v3
               with:
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
@@ -37,11 +42,11 @@ jobs:
                 script: |
                   cd ~/hma-python-be
                   touch .env
-                  echo GOOGLE_API_KEY=${{secrets.GOOGLE_API_KEY}}"
-                  echo LANGCHAIN_TRACING_V2="true"
-                  echo LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+                  echo "GOOGLE_API_KEY=${{secrets.GOOGLE_API_KEY}}"
+                  echo "LANGCHAIN_TRACING_V2=true"
+                  echo "LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
                   echo "LANGCHAIN_API_KEY=${{secrets.LANGCHAIN_API_KEY}}"
-                  echo LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}"
+                  echo "LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}"
                   sudo docker compose -f docker-compose-hma-python-be.yaml down --volumes
                   sudo docker compose -f docker-compose-hma-python-be.yaml pull
                   sudo docker compose -f docker-compose-hma-python-be.yaml up -d
