@@ -47,9 +47,9 @@ jobs:
                   echo "LANGCHAIN_ENDPOINT=${{env.LANGCHAIN_ENDPOINT}}" >> .env
                   echo "LANGCHAIN_API_KEY=${{secrets.LANGCHAIN_API_KEY}}" >> .emv
                   echo "LANGCHAIN_PROJECT=${{secrets.LANGCHAIN_PROJECT}}" >> .env
-                  sudo docker compose -f docker-compose-hma-python-be.yaml down --volumes
-                  sudo docker compose -f docker-compose-hma-python-be.yaml pull
-                  sudo docker compose -f docker-compose-hma-python-be.yaml up -d
+                  docker compose -f docker-compose-hma-python-be.yaml down --volumes
+                  docker compose -f docker-compose-hma-python-be.yaml pull
+                  docker compose -f docker-compose-hma-python-be.yaml up -d
     
     
     
